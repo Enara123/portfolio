@@ -1,3 +1,28 @@
-<section id="projects" class="py-24">
-    <h2>Projects</h2>
+---
+import ProjectCard from "./ProjectCard.astro";
+
+const projects = [
+    {
+        title: "Focaii",
+        description:
+            "A productivity application designed to help students improve focus and manage goals.",
+        technologies: ["Swift", "SwiftUI", "Firebase", "Core Data"],
+        github: "#",
+    },
+    {
+        title: "Portfolio",
+        description:
+            "A personal portfolio built with Astro and modern web technologies.",
+        technologies: ["Astro", "Tailwind CSS", "TypeScript"],
+        github: "#",
+    },
+];
+---
+
+<section id="projects" class="mx-auto max-w-6xl px-6 py-24">
+    <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Projects</h2>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {projects.map((project) => <ProjectCard {...project} />)}
+    </div>
 </section>
