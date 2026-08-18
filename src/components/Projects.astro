@@ -6,6 +6,7 @@ const projects = [
         title: "Focaii",
         description:
             "A productivity application designed to help students improve focus and manage goals.",
+        type: "Mobile · Software",
         technologies: ["Swift", "SwiftUI", "Firebase", "Core Data"],
         github: "#",
     },
@@ -13,14 +14,39 @@ const projects = [
         title: "Portfolio",
         description:
             "A personal portfolio built with Astro and modern web technologies.",
+        type: "Web · Software",
         technologies: ["Astro", "Tailwind CSS", "TypeScript"],
+        github: "#",
+    },
+    {
+        title: "UI/UX Project",
+        description:
+            "A user interface and experience design project focused on creating a simple and intuitive experience.",
+        type: "UI/UX",
+        technologies: ["Figma"],
+        github: "#",
+    },
+    {
+        title: "Full Stack Project",
+        description:
+            "A full-stack application built to explore frontend, backend, and data management.",
+        type: "Full Stack",
+        technologies: ["React", "Node.js", "PostgreSQL"],
         github: "#",
     },
 ];
 ---
 
 <section id="projects" class="mx-auto max-w-6xl px-6 py-24">
-    <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Projects</h2>
+    <div>
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">
+            Selected Work
+        </h2>
+
+        <p class="mt-4 max-w-2xl text-lg text-slate-600">
+            A selection of things I've designed, built, and explored.
+        </p>
+    </div>
 
     <div class="mt-10 grid gap-6 md:grid-cols-2">
         {projects.map((project) => <ProjectCard {...project} />)}
