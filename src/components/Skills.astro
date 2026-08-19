@@ -2,15 +2,24 @@
 const skills = [
     {
         category: "Languages",
-        items: ["Swift", "TypeScript", "JavaScript"],
+        items: ["Swift", "JavaScript", "TypeScript", "Python", "SQL"],
     },
     {
-        category: "Frameworks",
-        items: ["SwiftUI", "Astro", "React"],
+        category: "Development",
+        items: [
+            "React",
+            "HTML",
+            "CSS",
+            "Node.js",
+            "Express.js",
+            "REST APIs",
+            "MongoDB",
+            "MySQL",
+        ],
     },
     {
-        category: "Tools",
-        items: ["Firebase", "Git", "Vercel"],
+        category: "Tools & Technologies",
+        items: ["Firebase", "Git", "GitHub", "Docker", "AWS SQS"],
     },
 ];
 ---
@@ -65,7 +74,7 @@ const skills = [
                         {skill.items.map((item) => (
                             <div class="flex items-center gap-3">
                                 <span
-                                    class="h-1.5 w-1.5 rounded-full"
+                                    class="h-1.5 w-1.5 shrink-0 rounded-full"
                                     style="background-color: var(--accent);"
                                 />
 
