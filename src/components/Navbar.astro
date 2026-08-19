@@ -13,63 +13,168 @@ import ThemeToggle from "./ThemeToggle.astro";
         <!-- Logo -->
         <a
             href="/"
-            class="font-bold text-xl tracking-tight"
+            class="text-xl font-bold tracking-tight transition-colors hover:text-[var(--accent)]"
             style="font-family: 'Geist', sans-serif;"
         >
             Enara K
         </a>
 
-        <!-- Navigation -->
-        <ul class="flex items-center gap-8 text-sm font-medium">
-            <li>
-                <a
-                    href="#about"
-                    class="transition-colors"
-                    style="color: var(--foreground);"
-                    onmouseover="this.style.color='var(--accent)'"
-                    onmouseout="this.style.color='var(--foreground)'"
-                >
-                    About
-                </a>
-            </li>
+        <!-- Desktop navigation -->
+        <div class="hidden items-center gap-8 md:flex">
+            <ul class="flex items-center gap-8 text-sm font-medium">
+                <li>
+                    <a
+                        href="#projects"
+                        class="transition-colors hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        Projects
+                    </a>
+                </li>
 
-            <li>
-                <a
-                    href="#projects"
-                    class="transition-colors"
-                    style="color: var(--foreground);"
-                    onmouseover="this.style.color='var(--accent)'"
-                    onmouseout="this.style.color='var(--foreground)'"
-                >
-                    Projects
-                </a>
-            </li>
+                <li>
+                    <a
+                        href="#about"
+                        class="transition-colors hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        About
+                    </a>
+                </li>
 
-            <li>
-                <a
-                    href="/blog"
-                    class="transition-colors"
-                    style="color: var(--foreground);"
-                    onmouseover="this.style.color='var(--accent)'"
-                    onmouseout="this.style.color='var(--foreground)'"
-                >
-                    Blog
-                </a>
-            </li>
+                <li>
+                    <a
+                        href="/blog"
+                        class="transition-colors hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        Blog
+                    </a>
+                </li>
 
-            <li>
-                <a
-                    href="#contact"
-                    class="transition-colors"
-                    style="color: var(--foreground);"
-                    onmouseover="this.style.color='var(--accent)'"
-                    onmouseout="this.style.color='var(--foreground)'"
-                >
-                    Contact
-                </a>
-            </li>
-        </ul>
+                <li>
+                    <a
+                        href="#contact"
+                        class="transition-colors hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        Contact
+                    </a>
+                </li>
+            </ul>
 
-        <ThemeToggle />
+            <!-- Theme toggle -->
+            <ThemeToggle />
+        </div>
+
+        <!-- Mobile controls -->
+        <div class="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+
+            <button
+                id="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                class="flex h-10 w-10 items-center justify-center rounded-lg border transition-colors hover:border-[var(--accent)]"
+                style="
+                    border-color: var(--border);
+                    color: var(--foreground);
+                "
+            >
+                <!-- Menu icon -->
+                <svg
+                    id="menu-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.8"
+                    stroke="currentColor"
+                    class="h-5 w-5"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile navigation -->
+    <div
+        id="mobile-menu"
+        class="hidden border-t md:hidden"
+        style="border-color: var(--border);"
+    >
+        <div class="mx-auto max-w-6xl px-6 py-5">
+            <ul class="flex flex-col gap-1">
+                <li>
+                    <a
+                        href="#projects"
+                        class="block rounded-lg px-3 py-3 text-sm font-medium transition-colors hover:bg-[var(--surface)] hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        Projects
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="#about"
+                        class="block rounded-lg px-3 py-3 text-sm font-medium transition-colors hover:bg-[var(--surface)] hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="/blog"
+                        class="block rounded-lg px-3 py-3 text-sm font-medium transition-colors hover:bg-[var(--surface)] hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="#contact"
+                        class="block rounded-lg px-3 py-3 text-sm font-medium transition-colors hover:bg-[var(--surface)] hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+
+<script>
+    const menuButton = document.querySelector<HTMLButtonElement>(
+        "#mobile-menu-button",
+    );
+
+    const mobileMenu = document.querySelector<HTMLElement>("#mobile-menu");
+
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener("click", () => {
+            const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+
+            menuButton.setAttribute("aria-expanded", String(!isOpen));
+
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        // Close menu after selecting a navigation item
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+                menuButton.setAttribute("aria-expanded", "false");
+            });
+        });
+    }
+</script>
