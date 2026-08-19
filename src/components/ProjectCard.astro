@@ -1,0 +1,162 @@
+---
+import type { ImageMetadata } from "astro";
+
+interface Props {
+    number: string;
+    title: string;
+    description: string;
+    type: string;
+    categories: string[];
+    technologies: string[];
+    image: ImageMetadata;
+    screenshots: ImageMetadata[];
+    imageType?: "mobile" | "desktop" | "design";
+    github?: string;
+    demo?: string;
+}
+
+const {
+    number,
+    title,
+    description,
+    type,
+    categories,
+    technologies,
+    image,
+    screenshots,
+    imageType = "desktop",
+    github,
+    demo,
+} = Astro.props;
+---
+
+<article
+    data-categories={categories.join(",")}
+    data-project={title}
+    class="group overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1"
+    style="
+        border-color: var(--border);
+        background-color: var(--background);
+    "
+>
+    <!-- Project Preview -->
+    <button
+        type="button"
+        data-open-project={title}
+        class="block w-full cursor-pointer text-left"
+        aria-label={`View ${title} project details`}
+    >
+        <div
+            class="relative aspect-[16/10] overflow-hidden"
+            style="background-color: var(--surface);"
+        >
+            {
+                imageType === "mobile" && screenshots.length > 0 ? (
+                    <div class="flex h-full items-center justify-center gap-3 px-8 py-6 md:gap-5">
+                        {screenshots.slice(0, 3).map((screenshot, index) => (
+                            <img
+                                src={screenshot.src}
+                                alt=""
+                                class:list={[
+                                    "h-[82%] w-auto rounded-xl object-contain shadow-lg transition-transform duration-500",
+                                    index === 1 && "group-hover:-translate-y-2",
+                                    index !== 1 && "group-hover:-translate-y-1",
+                                ]}
+                                loading="lazy"
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div class="flex h-full w-full items-center justify-center p-4 md:p-6">
+                        <img
+                            src={image.src}
+                            alt={`${title} project preview`}
+                            class="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                            loading="lazy"
+                        />
+                    </div>
+                )
+            }
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 md:p-7">
+            <div class="flex items-center justify-between">
+                <span
+                    class="text-xs font-semibold tracking-widest"
+                    style="color: var(--accent);"
+                >
+                    {number}
+                </span>
+
+                <span
+                    class="text-xs font-medium uppercase tracking-wide"
+                    style="color: var(--muted);"
+                >
+                    {type}
+                </span>
+            </div>
+
+            <h3
+                class="mt-4 text-2xl font-semibold tracking-tight"
+                style="font-family: 'Geist', sans-serif;"
+            >
+                {title}
+            </h3>
+
+            <p class="mt-3 leading-relaxed" style="color: var(--muted);">
+                {description}
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+                {
+                    technologies.map((tech) => (
+                        <span
+                            class="rounded-full border px-3 py-1 text-xs"
+                            style="
+                                border-color: var(--border);
+                                color: var(--muted);
+                            "
+                        >
+                            {tech}
+                        </span>
+                    ))
+                }
+            </div>
+        </div>
+    </button>
+
+    <!-- External links -->
+    {
+        (github || demo) && (
+            <div
+                class="flex items-center gap-5 border-t px-6 py-4 md:px-7"
+                style="border-color: var(--border);"
+            >
+                {github && (
+                    <a
+                        href={github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        GitHub →
+                    </a>
+                )}
+
+                {demo && (
+                    <a
+                        href={demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
+                        style="color: var(--foreground);"
+                    >
+                        Live Demo →
+                    </a>
+                )}
+            </div>
+        )
+    }
+</article>

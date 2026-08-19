@@ -1,0 +1,213 @@
+---
+import type { ImageMetadata } from "astro";
+
+interface Props {
+    number: string;
+    title: string;
+    description: string;
+    type: string;
+    categories: string[];
+    technologies: string[];
+    image: ImageMetadata;
+    screenshots: ImageMetadata[];
+    github?: string;
+    demo?: string;
+}
+
+const { title, description, type, technologies, screenshots, github, demo } =
+    Astro.props;
+---
+
+<div
+    data-project-modal={title}
+    class="fixed inset-0 z-[100] hidden"
+    aria-hidden="true"
+>
+    <!-- Backdrop -->
+    <div data-close-modal class="absolute inset-0 bg-black/50 backdrop-blur-sm">
+    </div>
+
+    <!-- Modal -->
+    <div class="relative flex h-full items-center justify-center p-4 md:p-8">
+        <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`modal-title-${title}`}
+            class="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border shadow-2xl"
+            style="
+        border-color: var(--border);
+        background-color: var(--background);
+    "
+        >
+            <!-- Close -->
+            <button
+                type="button"
+                data-close-modal
+                aria-label="Close project"
+                class="absolute right-5 top-5 z-10 flex h-9 w-9 items-center justify-center rounded-full border backdrop-blur transition-colors hover:border-[var(--accent)]"
+                style="
+                    border-color: var(--border);
+                    color: var(--foreground);
+                    background-color: color-mix(in srgb, var(--background) 80%, transparent);
+                "
+            >
+                <span class="text-lg leading-none">×</span>
+            </button>
+
+            <!-- Header -->
+            <div class="p-6 pb-4 md:p-10 md:pb-6">
+                <div class="flex items-center gap-3">
+                    <span
+                        class="h-2 w-2 rounded-full"
+                        style="background-color: var(--accent);"></span>
+
+                    <span
+                        class="text-xs font-semibold uppercase tracking-widest"
+                        style="color: var(--accent);"
+                    >
+                        {type}
+                    </span>
+                </div>
+
+                <h2
+                    id={`modal-title-${title}`}
+                    class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl"
+                    style="font-family: 'Geist', sans-serif;"
+                >
+                    {title}
+                </h2>
+
+                <p
+                    class="mt-4 max-w-2xl leading-relaxed"
+                    style="color: var(--muted);"
+                >
+                    {description}
+                </p>
+            </div>
+
+            <!-- Screenshots -->
+            <div class="min-h-0 flex-1 overflow-y-auto px-6 md:px-10">
+                <div class="space-y-4">
+                    {
+                        screenshots.map((screenshot, index) => (
+                            <div
+                                class="overflow-hidden rounded-xl border"
+                                style="border-color: var(--border);"
+                            >
+                                <img
+                                    src={screenshot.src}
+                                    alt={`${title} screenshot ${index + 1}`}
+                                    class="w-full"
+                                    loading="lazy"
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div
+                class="mt-8 flex flex-wrap items-center gap-3 border-t p-6 md:px-10 md:py-6"
+                style="border-color: var(--border);"
+            >
+                <div class="flex flex-wrap gap-2">
+                    {
+                        technologies.map((tech) => (
+                            <span
+                                class="rounded-full border px-3 py-1 text-xs"
+                                style="
+                                    border-color: var(--border);
+                                    color: var(--muted);
+                                "
+                            >
+                                {tech}
+                            </span>
+                        ))
+                    }
+                </div>
+
+                <div class="ml-auto flex gap-4">
+                    {
+                        github && (
+                            <a
+                                href={github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
+                                style="color: var(--foreground);"
+                            >
+                                GitHub →
+                            </a>
+                        )
+                    }
+
+                    {
+                        demo && (
+                            <a
+                                href={demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
+                                style="color: var(--foreground);"
+                            >
+                                Live Demo →
+                            </a>
+                        )
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const openButtons = document.querySelectorAll<HTMLElement>(
+        "[data-open-project]",
+    );
+
+    const modals = document.querySelectorAll<HTMLElement>(
+        "[data-project-modal]",
+    );
+
+    const closeModal = (modal: HTMLElement) => {
+        modal.classList.add("hidden");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    };
+
+    openButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const project = button.dataset.openProject;
+
+            const modal = document.querySelector<HTMLElement>(
+                `[data-project-modal="${project}"]`,
+            );
+
+            if (!modal) return;
+
+            modal.classList.remove("hidden");
+            modal.setAttribute("aria-hidden", "false");
+
+            document.body.style.overflow = "hidden";
+        });
+    });
+
+    modals.forEach((modal) => {
+        modal.querySelectorAll("[data-close-modal]").forEach((element) => {
+            element.addEventListener("click", () => {
+                closeModal(modal);
+            });
+        });
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+
+        modals.forEach((modal) => {
+            if (!modal.classList.contains("hidden")) {
+                closeModal(modal);
+            }
+        });
+    });
+</script>

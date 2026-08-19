@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const posts: CollectionEntry<"blog">[] = await getCollection("blog");
+
+const sortedPosts = posts.sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="Blog | Enara Koperahewa">
+    {
+        sortedPosts.length === 0 ? (
+            <main class="mx-auto flex min-h-[80vh] max-w-6xl items-center px-6 py-28">
+                <div class="max-w-3xl">
+                    <p
+                        class="text-sm font-semibold tracking-wide"
+                        style="color: var(--accent);"
+                    >
+                        COMING SOON
+                    </p>
+
+                    <h1
+                        class="mt-4 text-5xl font-bold tracking-tight md:text-7xl"
+                        style="font-family: 'Geist', sans-serif;"
+                    >
+                        Things I'm learning & building.
+                    </h1>
+
+                    <p
+                        class="mt-8 max-w-2xl text-lg leading-relaxed md:text-xl"
+                        style="color: var(--muted);"
+                    >
+                        I'll be writing about the things I'm building,
+                        technologies I'm exploring, lessons I've learned, and
+                        ideas I find interesting along the way.
+                    </p>
+
+                    <div class="mt-10">
+                        <a
+                            href="/"
+                            class="text-sm font-semibold transition-colors"
+                            style="color: var(--foreground);"
+                        >
+                            ← Back to portfolio
+                        </a>
+                    </div>
+                </div>
+            </main>
+        ) : (
+            <main class="mx-auto max-w-6xl px-6 py-28">
+                <div class="max-w-3xl">
+                    <h1
+                        class="text-5xl font-bold tracking-tight md:text-7xl"
+                        style="font-family: 'Geist', sans-serif;"
+                    >
+                        Blog
+                    </h1>
+
+                    <p
+                        class="mt-6 text-lg leading-relaxed"
+                        style="color: var(--muted);"
+                    >
+                        Thoughts, experiments, and things I'm learning along the
+                        way.
+                    </p>
+                </div>
+
+                <div class="mt-12 space-y-8">
+                    {sortedPosts.map((post) => (
+                        <article
+                            class="border-b pb-8"
+                            style="border-color: var(--border);"
+                        >
+                            <p class="text-sm" style="color: var(--muted);">
+                                {post.data.date.toLocaleDateString("en-US", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                })}
+                            </p>
+
+                            <h2
+                                class="mt-2 text-2xl font-semibold"
+                                style="font-family: 'Geist', sans-serif;"
+                            >
+                                <a
+                                    href={`/blog/${post.id}`}
+                                    class="transition-colors"
+                                    style="color: var(--foreground);"
+                                >
+                                    {post.data.title}
+                                </a>
+                            </h2>
+
+                            <p class="mt-3" style="color: var(--muted);">
+                                {post.data.description}
+                            </p>
+                        </article>
+                    ))}
+                </div>
+            </main>
+        )
+    }
+</BaseLayout>

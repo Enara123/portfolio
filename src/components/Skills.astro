@@ -1,0 +1,94 @@
+---
+const skills = [
+    {
+        category: "Languages",
+        items: ["Swift", "JavaScript", "TypeScript", "Python", "SQL"],
+    },
+    {
+        category: "Development",
+        items: [
+            "React",
+            "HTML",
+            "CSS",
+            "Node.js",
+            "Express.js",
+            "REST APIs",
+            "MongoDB",
+            "MySQL",
+        ],
+    },
+    {
+        category: "Tools & Technologies",
+        items: ["Firebase", "Git", "GitHub", "Docker", "AWS SQS"],
+    },
+];
+---
+
+<section class="mx-auto max-w-6xl px-6 py-28">
+    <!-- Heading -->
+    <div class="flex items-center gap-3">
+        <span
+            class="h-2 w-2 rounded-full"
+            style="background-color: var(--accent);"></span>
+
+        <span
+            class="text-sm font-semibold tracking-wide"
+            style="color: var(--accent);"
+        >
+            SKILLS
+        </span>
+    </div>
+
+    <h2
+        class="mt-5 text-4xl font-semibold tracking-tight md:text-5xl"
+        style="font-family: 'Geist', sans-serif;"
+    >
+        Technologies I work with.
+    </h2>
+
+    <!-- Skills -->
+    <div
+        class="mt-12 grid overflow-hidden rounded-2xl border md:grid-cols-3"
+        style="
+            border-color: var(--border);
+            background-color: var(--background);
+        "
+    >
+        {
+            skills.map((skill, index) => (
+                <div
+                    class:list={[
+                        "p-7 md:p-8",
+                        index !== 0 && "border-t md:border-l md:border-t-0",
+                    ]}
+                    style="border-color: var(--border);"
+                >
+                    <h3
+                        class="text-lg font-semibold tracking-tight"
+                        style="font-family: 'Geist', sans-serif;"
+                    >
+                        {skill.category}
+                    </h3>
+
+                    <div class="mt-5 space-y-3">
+                        {skill.items.map((item) => (
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="h-1.5 w-1.5 shrink-0 rounded-full"
+                                    style="background-color: var(--accent);"
+                                />
+
+                                <span
+                                    class="text-sm"
+                                    style="color: var(--muted);"
+                                >
+                                    {item}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</section>

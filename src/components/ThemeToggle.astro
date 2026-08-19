@@ -1,0 +1,41 @@
+<button
+    id="theme-toggle"
+    type="button"
+    aria-label="Toggle dark mode"
+    class="flex h-9 w-9 items-center justify-center rounded-lg border transition-colors"
+    style="
+        border-color: var(--border);
+        color: var(--foreground);
+    "
+>
+    <span id="theme-icon">☾</span>
+</button>
+
+<script>
+    const button = document.querySelector("#theme-toggle");
+    const icon = document.querySelector("#theme-icon");
+
+    if (button && icon) {
+        const updateIcon = () => {
+            const isDark = document.documentElement.classList.contains("dark");
+
+            icon.textContent = isDark ? "☀" : "☾";
+            button.setAttribute(
+                "aria-label",
+                isDark ? "Switch to light mode" : "Switch to dark mode",
+            );
+        };
+
+        updateIcon();
+
+        button.addEventListener("click", () => {
+            const isDark = document.documentElement.classList.contains("dark");
+
+            document.documentElement.classList.toggle("dark");
+
+            localStorage.setItem("theme", isDark ? "light" : "dark");
+
+            updateIcon();
+        });
+    }
+</script>

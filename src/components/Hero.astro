@@ -1,0 +1,100 @@
+<section class="relative flex min-h-[85vh] items-center overflow-hidden">
+    <!-- Interactive accent -->
+    <div
+        id="hero-glow"
+        class="pointer-events-none absolute h-72 w-72 rounded-full opacity-20 blur-3xl transition-transform duration-300 ease-out"
+        style="
+            background-color: var(--accent);
+            left: 55%;
+            top: 35%;
+            transform: translate(-50%, -50%);
+        "
+    >
+    </div>
+
+    <!-- Secondary decorative glow -->
+    <div
+        class="pointer-events-none absolute -right-32 top-20 h-64 w-64 rounded-full opacity-10 blur-3xl"
+        style="background-color: var(--accent);"
+    >
+    </div>
+
+    <div class="relative mx-auto w-full max-w-6xl px-6 py-28">
+        <div class="max-w-4xl">
+            <!-- Introduction -->
+            <div class="mb-6 flex items-center gap-3">
+                <span
+                    class="h-2.5 w-2.5 rounded-full"
+                    style="background-color: var(--accent);"></span>
+
+                <p
+                    class="text-sm font-semibold tracking-wide"
+                    style="color: var(--accent);"
+                >
+                    HELLO, I'M
+                </p>
+            </div>
+
+            <!-- Name -->
+            <h1
+                class="text-5xl font-bold leading-[0.95] tracking-[-0.04em] md:text-7xl lg:text-8xl"
+                style="font-family: 'Geist', sans-serif;"
+            >
+                <span class="block" style="color: var(--accent);"> Enara </span>
+                Koperahewa
+            </h1>
+
+            <!-- Description -->
+            <p
+                class="mt-8 max-w-2xl text-lg leading-relaxed md:text-xl"
+                style="color: var(--muted);"
+            >
+                Software Engineer passionate about building challenging,
+                impactful software and exploring new tech.
+            </p>
+
+            <!-- Scroll cue -->
+            <a
+                href="#projects"
+                class="group mt-12 inline-flex items-center gap-3 text-sm font-semibold"
+                style="color: var(--foreground);"
+            >
+                <span
+                    class="flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 group-hover:-translate-y-1"
+                    style="border-color: var(--border);"
+                >
+                    ↓
+                </span>
+
+                <span
+                    class="transition-colors group-hover:text-[var(--accent)]"
+                >
+                    Explore my work
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    const hero = document.querySelector("section");
+    const glow = document.querySelector<HTMLElement>("#hero-glow");
+
+    if (hero && glow) {
+        hero.addEventListener("mousemove", (event) => {
+            const rect = hero.getBoundingClientRect();
+
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const moveX = (x / rect.width - 0.5) * 80;
+            const moveY = (y / rect.height - 0.5) * 80;
+
+            glow.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+        });
+
+        hero.addEventListener("mouseleave", () => {
+            glow.style.transform = "translate(-50%, -50%)";
+        });
+    }
+</script>

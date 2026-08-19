@@ -1,0 +1,295 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import ProjectModal from "./ProjectModal.astro";
+
+// Focaii
+import focaii1 from "../assets/projects/focaii/ss-1.png";
+import focaii2 from "../assets/projects/focaii/ss-2.png";
+import focaii3 from "../assets/projects/focaii/ss-3.png";
+import focaii4 from "../assets/projects/focaii/ss-4.png";
+
+// Campus Navigator
+import campus1 from "../assets/projects/campus-navigator/ss-1.png";
+import campus2 from "../assets/projects/campus-navigator/ss-2.png";
+import campus3 from "../assets/projects/campus-navigator/ss-3.png";
+import campus4 from "../assets/projects/campus-navigator/ss-4.png";
+
+// Bus Seat Reservation
+import busHero from "../assets/projects/ntc-bus/hero.png";
+
+// Louise Beck Properties
+import lbp1 from "../assets/projects/lbp/ss-1.png";
+import lbp2 from "../assets/projects/lbp/ss-2.png";
+import lbp3 from "../assets/projects/lbp/ss-3.png";
+
+// Green Jazz
+import gj1 from "../assets/projects/gj/ss-1.png";
+import gj2 from "../assets/projects/gj/ss-2.png";
+import gj3 from "../assets/projects/gj/ss-3.png";
+
+// Activity Planner
+import activity1 from "../assets/projects/activity-planner/ss-1.png";
+import activity2 from "../assets/projects/activity-planner/ss-2.png";
+import activity3 from "../assets/projects/activity-planner/ss-3.png";
+import activity4 from "../assets/projects/activity-planner/ss-4.png";
+
+// LMS
+import lmsHero from "../assets/projects/lms/hero.png";
+import lms1 from "../assets/projects/lms/ss-1.png";
+import lms2 from "../assets/projects/lms/ss-2.png";
+import lms3 from "../assets/projects/lms/ss-3.png";
+
+// Cricket Start
+import cricketHero from "../assets/projects/cricket-start/hero.png";
+import cricket1 from "../assets/projects/cricket-start/ss-1.png";
+
+const projects = [
+    {
+        number: "01",
+        title: "Focaii",
+        description:
+            "An all-in-one iOS productivity app designed to help students effectively work towards their goals.",
+        type: "Mobile",
+        imageType: "mobile" as const,
+        categories: ["mobile", "software", "ui/ux", "uni"],
+        technologies: [
+            "Swift",
+            "SwiftUI",
+            "Core Data",
+            "Firebase",
+            "Advanced iOS Features",
+        ],
+        image: focaii1,
+        screenshots: [focaii1, focaii2, focaii3, focaii4],
+        github: "https://github.com/Enara123/Focaii",
+    },
+
+    {
+        number: "02",
+        title: "Campus Navigator",
+        description:
+            "An iOS app designed and developed to make university life easier and stress-free for new and existing students.",
+        type: "Mobile",
+        imageType: "mobile" as const,
+        categories: ["mobile", "software", "ui/ux", "uni"],
+        technologies: ["Swift", "SwiftUI", "Core Data", "Firebase"],
+        image: campus1,
+        screenshots: [campus1, campus2, campus3, campus4],
+        github: "https://github.com/Enara123/CampusNavigator",
+    },
+
+    {
+        number: "03",
+        title: "Bus Seat Reservation System",
+        description:
+            "A centralized, real-time API for the National Transport Commission (NTC) of Sri Lanka, designed to manage inter-provincial bus seat reservations.",
+        type: "Web App",
+        imageType: "desktop" as const,
+        categories: ["software", "uni"],
+        technologies: [
+            "React",
+            "TypeScript",
+            "MUI",
+            "Node.js",
+            "Express.js",
+            "AWS SQS",
+            "MySQL",
+            "Docker",
+            "DigitalOcean",
+        ],
+        image: busHero,
+        screenshots: [busHero],
+        github: "https://github.com/Enara123/Bus-Seat-Reservation-API",
+    },
+
+    {
+        number: "04",
+        title: "Louise Beck Properties",
+        description:
+            "A website redesign for a property management company in North Carolina, created to replace an outdated existing website.",
+        type: "UI/UX",
+        imageType: "design" as const,
+        categories: ["ui/ux", "work"],
+        technologies: ["Figma", "Wireframing", "Hi-Fidelity Prototyping"],
+        image: lbp1,
+        screenshots: [lbp1, lbp2, lbp3],
+        demo: "https://www.louisebeckproperties.com/",
+    },
+
+    {
+        number: "05",
+        title: "Green Jazz Design Studio Website",
+        description:
+            "A website redesign project focused on creating a new and engaging hero section for Green Jazz Design Studio's landing page.",
+        type: "UI/UX",
+        imageType: "design" as const,
+        categories: ["ui/ux", "work"],
+        technologies: ["Figma", "Wireframing", "Hi-Fidelity Prototyping"],
+        image: gj1,
+        screenshots: [gj1, gj2, gj3],
+        demo: "https://greenjazz.com/",
+    },
+
+    {
+        number: "06",
+        title: "Activity Planner",
+        description:
+            "A mobile app designed for planning activities within specified start and end times.",
+        type: "UI/UX",
+        imageType: "mobile" as const,
+        categories: ["ui/ux", "work"],
+        technologies: ["Figma", "Wireframing", "Hi-Fidelity Prototyping"],
+        image: activity1,
+        screenshots: [activity1, activity2, activity3, activity4],
+        demo: "https://planner.greensparkstudio.com/",
+    },
+
+    {
+        number: "07",
+        title: "Learning Management System",
+        description:
+            "An interactive Learning Management System designed to support collaboration and personalized learning through adaptive features that respond to each student's level.",
+        type: "Web App",
+        imageType: "desktop" as const,
+        categories: ["software", "ui/ux", "uni"],
+        technologies: [
+            "React",
+            "JavaScript",
+            "Material UI",
+            "Node.js",
+            "Express.js",
+            "MongoDB",
+        ],
+        image: lmsHero,
+        screenshots: [lms1, lms2, lms3],
+        github: "https://github.com/Enara123/Learning-Management-System",
+    },
+
+    {
+        number: "08",
+        title: "Cricket Start Homepage",
+        description:
+            "A homepage design for an online cricket coaching platform for kids, focused on attracting potential customers and their parents.",
+        type: "UI/UX",
+        imageType: "design" as const,
+        categories: ["ui/ux"],
+        technologies: ["Figma", "Wireframing", "Hi-Fidelity Prototyping"],
+        image: cricket1,
+        screenshots: [cricket1],
+    },
+];
+
+const filters = [
+    { label: "All", value: "all" },
+    { label: "UI/UX", value: "ui/ux" },
+    { label: "Software", value: "software" },
+    { label: "Mobile", value: "mobile" },
+    { label: "Work", value: "work" },
+    { label: "Uni", value: "uni" },
+];
+---
+
+<section id="projects" class="mx-auto max-w-6xl px-6 py-28">
+    <!-- Heading -->
+    <div class="flex items-center gap-3">
+        <span
+            class="h-2 w-2 rounded-full"
+            style="background-color: var(--accent);"></span>
+
+        <span
+            class="text-sm font-semibold tracking-wide"
+            style="color: var(--accent);"
+        >
+            SELECTED WORK
+        </span>
+    </div>
+
+    <div
+        class="mt-5 flex flex-col justify-between gap-6 md:flex-row md:items-end"
+    >
+        <div>
+            <h2
+                class="text-4xl font-semibold tracking-tight md:text-5xl"
+                style="font-family: 'Geist', sans-serif;"
+            >
+                Things I've built.
+            </h2>
+
+            <p class="mt-4 max-w-2xl text-lg" style="color: var(--muted);">
+                A selection of things I've designed, built, and explored.
+            </p>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="mt-10 flex flex-wrap gap-2">
+        {
+            filters.map((filter, index) => (
+                <button
+                    class:list={[
+                        "project-filter rounded-full border px-4 py-2 text-sm font-medium transition-all",
+                        index === 0 && "active",
+                    ]}
+                    data-filter={filter.value}
+                    style={
+                        index === 0
+                            ? "background-color: var(--accent); color: white; border-color: var(--accent);"
+                            : "border-color: var(--border); color: var(--muted);"
+                    }
+                >
+                    {filter.label}
+                </button>
+            ))
+        }
+    </div>
+
+    <!-- Projects -->
+    <div id="project-grid" class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+            projects.map((project) => (
+                <>
+                    <ProjectCard {...project} />
+                    <ProjectModal {...project} />
+                </>
+            ))
+        }
+    </div>
+</section>
+
+<script>
+    const filterButtons =
+        document.querySelectorAll<HTMLButtonElement>(".project-filter");
+
+    const projectCards =
+        document.querySelectorAll<HTMLElement>("[data-categories]");
+
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const filter = button.dataset.filter;
+
+            filterButtons.forEach((btn) => {
+                btn.classList.remove("active");
+
+                btn.style.backgroundColor = "transparent";
+                btn.style.color = "var(--muted)";
+                btn.style.borderColor = "var(--border)";
+            });
+
+            button.classList.add("active");
+
+            button.style.backgroundColor = "var(--accent)";
+            button.style.color = "white";
+            button.style.borderColor = "var(--accent)";
+
+            projectCards.forEach((card) => {
+                const categories = card.dataset.categories?.split(",") ?? [];
+
+                if (filter === "all" || categories.includes(filter ?? "")) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
