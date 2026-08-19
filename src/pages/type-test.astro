@@ -1,0 +1,131 @@
+---
+import "../styles/global.css";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Typography Test</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body>
+        <main class="test-page">
+            <section class="font-section geist">
+                <p class="label">GEIST</p>
+
+                <h1>Enara Koperahewa</h1>
+
+                <h2>Building things I'm curious about.</h2>
+
+                <p class="body">
+                    I'm a software developer interested in creating useful,
+                    thoughtful and enjoyable digital experiences.
+                </p>
+
+                <div class="meta">Projects · About · Blog · Contact</div>
+            </section>
+
+            <section class="font-section inter">
+                <p class="label">INTER</p>
+
+                <h1>Enara Koperahewa</h1>
+
+                <h2>Building things I'm curious about.</h2>
+
+                <p class="body">
+                    I'm a software developer interested in creating useful,
+                    thoughtful and enjoyable digital experiences.
+                </p>
+
+                <div class="meta">Projects · About · Blog · Contact</div>
+            </section>
+
+            <section class="font-section manrope">
+                <p class="label">MANROPE</p>
+
+                <h1>Enara Koperahewa</h1>
+
+                <h2>Building things I'm curious about.</h2>
+
+                <p class="body">
+                    I'm a software developer interested in creating useful,
+                    thoughtful and enjoyable digital experiences.
+                </p>
+
+                <div class="meta">Projects · About · Blog · Contact</div>
+            </section>
+        </main>
+    </body>
+</html>
+
+<style>
+    .test-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px;
+    }
+
+    .font-section {
+        padding: 60px 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .label {
+        margin-bottom: 24px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        color: #6366f1;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: clamp(42px, 7vw, 72px);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+    }
+
+    h2 {
+        margin-top: 24px;
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 500;
+    }
+
+    .body {
+        max-width: 600px;
+        margin-top: 24px;
+        font-size: 18px;
+        line-height: 1.7;
+        color: #64748b;
+    }
+
+    .meta {
+        margin-top: 32px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #64748b;
+    }
+
+    .geist {
+        font-family: "Geist", sans-serif;
+    }
+
+    .inter {
+        font-family: "Inter", sans-serif;
+    }
+
+    .manrope {
+        font-family: "Manrope", sans-serif;
+    }
+</style>

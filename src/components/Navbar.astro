@@ -1,35 +1,75 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
 <nav
-    class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur"
+    class="sticky top-0 z-50 border-b backdrop-blur"
+    style="
+        border-color: var(--border);
+        background-color: color-mix(in srgb, var(--background) 85%, transparent);
+    "
 >
     <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <!-- Logo -->
-        <a href="/" class="text-xl font-bold tracking-tight"> Siluni </a>
+        <a
+            href="/"
+            class="font-bold text-xl tracking-tight"
+            style="font-family: 'Geist', sans-serif;"
+        >
+            Enara K
+        </a>
 
         <!-- Navigation -->
         <ul class="flex items-center gap-8 text-sm font-medium">
             <li>
-                <a href="#about" class="transition hover:text-blue-600">
+                <a
+                    href="#about"
+                    class="transition-colors"
+                    style="color: var(--foreground);"
+                    onmouseover="this.style.color='var(--accent)'"
+                    onmouseout="this.style.color='var(--foreground)'"
+                >
                     About
                 </a>
             </li>
 
             <li>
-                <a href="#projects" class="transition hover:text-blue-600">
+                <a
+                    href="#projects"
+                    class="transition-colors"
+                    style="color: var(--foreground);"
+                    onmouseover="this.style.color='var(--accent)'"
+                    onmouseout="this.style.color='var(--foreground)'"
+                >
                     Projects
                 </a>
             </li>
 
             <li>
-                <a href="/blog" class="transition hover:text-blue-600">
+                <a
+                    href="/blog"
+                    class="transition-colors"
+                    style="color: var(--foreground);"
+                    onmouseover="this.style.color='var(--accent)'"
+                    onmouseout="this.style.color='var(--foreground)'"
+                >
                     Blog
                 </a>
             </li>
 
             <li>
-                <a href="#contact" class="transition hover:text-blue-600">
+                <a
+                    href="#contact"
+                    class="transition-colors"
+                    style="color: var(--foreground);"
+                    onmouseover="this.style.color='var(--accent)'"
+                    onmouseout="this.style.color='var(--foreground)'"
+                >
                     Contact
                 </a>
             </li>
         </ul>
+
+        <ThemeToggle />
     </div>
 </nav>
