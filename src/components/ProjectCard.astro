@@ -1,86 +1,117 @@
 ---
 interface Props {
+    number: string;
     title: string;
     description: string;
     type: string;
+    categories: string[];
     technologies: string[];
     github?: string;
     demo?: string;
 }
 
-const { title, description, type, technologies, github, demo } = Astro.props;
+const {
+    number,
+    title,
+    description,
+    type,
+    categories,
+    technologies,
+    github,
+    demo,
+} = Astro.props;
 ---
 
 <article
-    class="group rounded-xl border p-6 transition-all duration-200 hover:-translate-y-1"
+    data-categories={categories.join(",")}
+    class="group relative overflow-hidden rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1"
     style="
         border-color: var(--border);
         background-color: var(--background);
     "
 >
-    <div class="flex items-start justify-between gap-4">
+    <!-- Subtle hover glow -->
+    <div
+        class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-15"
+        style="background-color: var(--accent);"
+    >
+    </div>
+
+    <div class="relative">
+        <!-- Number + Type -->
+        <div class="flex items-center justify-between gap-4">
+            <span class="text-sm font-medium" style="color: var(--accent);">
+                {number}
+            </span>
+
+            <span class="text-right text-sm" style="color: var(--muted);">
+                {type}
+            </span>
+        </div>
+
+        <!-- Title -->
         <h3
-            class="text-2xl font-semibold tracking-tight"
+            class="mt-10 text-2xl font-semibold tracking-tight md:text-3xl"
             style="font-family: 'Geist', sans-serif;"
         >
             {title}
         </h3>
 
-        <span class="shrink-0 text-sm font-medium" style="color: var(--muted);">
-            {type}
-        </span>
-    </div>
+        <!-- Description -->
+        <p class="mt-4 max-w-xl leading-relaxed" style="color: var(--muted);">
+            {description}
+        </p>
 
-    <p
-        class="mt-4 max-w-xl text-base leading-relaxed"
-        style="color: var(--muted);"
-    >
-        {description}
-    </p>
+        <!-- Technologies -->
+        <div class="mt-7 flex flex-wrap gap-2">
+            {
+                technologies.map((tech) => (
+                    <span
+                        class="rounded-full border px-3 py-1.5 text-sm"
+                        style="
+                            border-color: var(--border);
+                            color: var(--muted);
+                        "
+                    >
+                        {tech}
+                    </span>
+                ))
+            }
+        </div>
 
-    <div class="mt-6 flex flex-wrap gap-2">
+        <!-- Links -->
         {
-            technologies.map((tech) => (
-                <span
-                    class="rounded-full border px-3 py-1 text-sm"
-                    style="
-                        border-color: var(--border);
-                        color: var(--muted);
-                    "
-                >
-                    {tech}
-                </span>
-            ))
+            (github || demo) && (
+                <div class="mt-8 flex flex-wrap gap-5">
+                    {github && (
+                        <a
+                            href={github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
+                            style="color: var(--foreground);"
+                        >
+                            GitHub
+                            <span class="ml-1 inline-block transition-transform duration-200 group-hover:translate-x-1">
+                                →
+                            </span>
+                        </a>
+                    )}
+
+                    {demo && (
+                        <a
+                            href={demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
+                            style="color: var(--foreground);"
+                        >
+                            Live Demo
+                            <span class="ml-1 inline-block">→</span>
+                        </a>
+                    )}
+                </div>
+            )
         }
     </div>
-
-    {
-        (github || demo) && (
-            <div class="mt-8 flex gap-5">
-                {github && (
-                    <a
-                        href={github}
-                        class="text-sm font-medium transition-colors"
-                        style="color: var(--foreground);"
-                        onmouseover="this.style.color='var(--accent)'"
-                        onmouseout="this.style.color='var(--foreground)'"
-                    >
-                        GitHub →
-                    </a>
-                )}
-
-                {demo && (
-                    <a
-                        href={demo}
-                        class="text-sm font-medium transition-colors"
-                        style="color: var(--foreground);"
-                        onmouseover="this.style.color='var(--accent)'"
-                        onmouseout="this.style.color='var(--foreground)'"
-                    >
-                        Live Demo →
-                    </a>
-                )}
-            </div>
-        )
-    }
 </article>
